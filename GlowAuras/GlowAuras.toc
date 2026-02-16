@@ -1,0 +1,15 @@
+## Interface: 120000
+## Title: GlowAuras
+## Notes: Learn and configure glow proc alerts.
+## Author: Simbro
+## Version: 2.5
+## SavedVariables: GlowAurasDB
+## OptionalDeps: LibSharedMedia-3.0
+
+# ---- Embedded Libraries ----
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+
+# ---- Addon Core ----
+GlowAuras.lua
