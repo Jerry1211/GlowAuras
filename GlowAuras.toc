@@ -1,0 +1,9 @@
+## Interface: 120000
+## Title: GlowAuras
+## Notes: Learns SPELL_ACTIVATION_OVERLAY_GLOW_* spellIDs and shows per-glow alerts.
+## Author: Midnight
+## Version: 1.0.0
+## SavedVariables: GlowAurasDB
+
+GlowAuras_IconPicker.lua
+GlowAuras.lua
