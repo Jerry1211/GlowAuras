@@ -8,6 +8,14 @@
 
 GA_IconPicker = GA_IconPicker or {}
 local IP = GA_IconPicker
+local C = {
+    bg        = {0.067, 0.094, 0.153, 0.97},
+    bgLight   = {0.122, 0.161, 0.216, 1.0},
+    bgDark    = {0.04,  0.06,  0.10,  1.0},
+    borderDim = {0.17,  0.22,  0.30,  0.9},
+    text      = {0.92,  0.95,  1.0,   1.0},
+    textDim   = {0.75,  0.80,  0.88,  1.0},
+}
 
 local function Clamp(v, lo, hi)
     v = tonumber(v) or lo
@@ -25,6 +33,8 @@ local function MakeLabel(parent, text, x, y, template)
     local fs = parent:CreateFontString(nil, "OVERLAY", template or "GameFontNormal")
     fs:SetPoint("TOPLEFT", x, y)
     fs:SetText(text)
+    local col = (template == "GameFontHighlightSmall") and C.textDim or C.text
+    fs:SetTextColor(unpack(col))
     return fs
 end
 
@@ -33,6 +43,8 @@ local function MakeButton(parent, text, w, h, x, y)
     b:SetSize(w, h)
     b:SetPoint("TOPLEFT", x, y)
     b:SetText(text)
+    local fs = b:GetFontString()
+    if fs then fs:SetTextColor(unpack(C.text)) end
     return b
 end
 
@@ -205,8 +217,8 @@ function IP:Ensure(mainFrame, getAuraFunc, onPickFunc, placeAboveFunc)
         tile = true, tileSize = 16, edgeSize = 16,
         insets = { left = 4, right = 4, top = 4, bottom = 4 },
     })
-    f:SetBackdropColor(0.04, 0.05, 0.08, 1.0)
-    f:SetBackdropBorderColor(0.25, 0.3, 0.4, 1.0)
+    f:SetBackdropColor(unpack(C.bg))
+    f:SetBackdropBorderColor(unpack(C.borderDim))
 
     -- movable via title strip
     f:SetMovable(true)
@@ -249,8 +261,8 @@ function IP:Ensure(mainFrame, getAuraFunc, onPickFunc, placeAboveFunc)
         tile = true, tileSize = 16, edgeSize = 12,
         insets = { left = 3, right = 3, top = 3, bottom = 3 },
     })
-    listFrame:SetBackdropColor(0, 0, 0, 0.25)
-    listFrame:SetBackdropBorderColor(0.2, 0.25, 0.35, 1.0)
+    listFrame:SetBackdropColor(C.bgDark[1], C.bgDark[2], C.bgDark[3], 0.75)
+    listFrame:SetBackdropBorderColor(unpack(C.borderDim))
 
     local scroll = CreateFrame("ScrollFrame", "GA_IconScrollFrame", f, "FauxScrollFrameTemplate")
     scroll:SetPoint("TOPLEFT", listFrame, "TOPLEFT", 0, -2)
@@ -344,7 +356,7 @@ function IP:Ensure(mainFrame, getAuraFunc, onPickFunc, placeAboveFunc)
         UpdateList()
     end)
 
-    local ok = MakeButton(f, "OK", 90, 24, 12, -362)
+    local ok = MakeButton(f, "OK", 90, 24, 12, -312)
     ok:SetScript("OnClick", function() f:Hide() end)
 
     local hint = f:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")

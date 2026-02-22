@@ -2,8 +2,14 @@
 ## Title: GlowAuras
 ## Notes: Learns SPELL_ACTIVATION_OVERLAY_GLOW_* spellIDs and shows per-glow alerts.
 ## Author: Midnight
-## Version: 1.0.0
+## Version: 2.1.0
 ## SavedVariables: GlowAurasDB
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDeflate\LibDeflate.lua
+Libs\LibSerialize\LibSerialize.lua
+Libs\LibSharedMedia-3.0\lib.xml
 
 GlowAuras_IconPicker.lua
 GlowAuras.lua
